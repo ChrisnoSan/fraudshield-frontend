@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { SessionProvider } from "next-auth/react";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 /* ============================================================
    LOGIN SCREEN
@@ -176,7 +177,7 @@ function ChatApp() {
             {messages.map((msg, i) => (
               <div key={i} className={msg.role === "user" ? "msg-user" : "msg-agent"}>
                 {msg.role === "agent" ? (
-                  <ReactMarkdown>{msg.content}</ReactMarkdown>
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>
                 ) : (
                   msg.content
                 )}
